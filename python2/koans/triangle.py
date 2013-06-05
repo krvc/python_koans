@@ -17,15 +17,21 @@
 # and
 #   about_triangle_project_2.py
 #
+def triangle_valid(a, b, c):
+    if (a <= 0) or (b <= 0) or (c <= 0):
+        raise TriangleError('Triangle must have all positive sides')
+    else:
+        pass
+    if a + b <= c or a + c <= b or b + c <= a:
+        raise TriangleError('the measurements wont make a triangle')
+
+
 def triangle(a, b, c):
     # DELETE 'PASS' AND WRITE THIS CODE
-    #import ipdp; ipdb.set_trace()
-
-    if a <= 0 or b <= 0 or c <= 0:
-        raise TriangleError
-    elif a == b == c:
+    triangle_valid(a, b, c)
+    if a == b == c:
         return "equilateral"
-    elif (a == b and a != c) or (a == c and a != b) or (b == c and b != a):
+    elif a == b or b == c or a == c:
         return "isosceles"
     else:
         return "scalene"
