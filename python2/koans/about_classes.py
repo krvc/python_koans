@@ -125,7 +125,7 @@ class AboutClasses(Koan):
             return self
 
         def __str__(self):
-            return __
+            return self._name
 
         def __repr__(self):
             return "<Dog named '" + self._name + "'>"
