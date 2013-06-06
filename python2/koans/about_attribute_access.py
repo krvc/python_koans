@@ -20,7 +20,7 @@ class AboutAttributeAccess(Koan):
             typical.foobar()
         except Exception as exception:
             self.assertEqual(AttributeError, exception.__class__)
-            self.assertMatch("'TypicalObject' has no attribute foobar", exception[0])
+            self.assertMatch("'TypicalObject' object has no attribute 'foobar'", exception[0])
 
     def test_calling_getattribute_causes_an_attribute_error(self):
         typical = self.TypicalObject()
@@ -28,7 +28,7 @@ class AboutAttributeAccess(Koan):
         try:
             typical.__getattribute__('foobar')
         except AttributeError as exception:
-            self.assertMatch("'TypicalObject' has no attribute foobar", exception[0])
+            self.assertMatch("'TypicalObject' object has no attribute 'foobar'", exception[0])
 
         # THINK ABOUT IT:
         #
@@ -55,7 +55,7 @@ class AboutAttributeAccess(Koan):
         try:
             catcher.foobaz(1)
         except TypeError as ex:
-            self.assertMatch("'str' object could not be callable", ex[0])
+            self.assertMatch("'str' object is not callable", ex[0])
 
         # foobaz returns a string. What happens to the '(1)' part?
         # Try entering this into a python console to reproduce the issue:
@@ -91,8 +91,7 @@ class AboutAttributeAccess(Koan):
         try:
             catcher.normal_undefined_attribute
         except AttributeError as ex:
-            self.assertMatch("'WellBehavedFooCatcher' object has no attribute \
-                             'normal_undefined_attribute'", ex[0])
+            self.assertMatch("'WellBehavedFooCatcher' object has no attribute 'normal_undefined_attribute'", ex[0])
 
     # ------------------------------------------------------------------
 
@@ -160,10 +159,10 @@ class AboutAttributeAccess(Koan):
         catcher.purple_flamingos()
         catcher.free_pie()
 
-        self.assertEqual("DuffObject",
+        self.assertEqual(catcher.DuffObject,
             catcher.give_me_duff_or_give_me_death().__class__)
 
-        self.assertEqual(__, catcher.no_of_getattr_calls)
+        self.assertEqual(3, catcher.no_of_getattr_calls)
 
     # ------------------------------------------------------------------
 
@@ -184,7 +183,7 @@ class AboutAttributeAccess(Koan):
         fanboy.comic = 'The Laminator, issue #1'
         fanboy.pie = 'blueberry'
 
-        self.assertEqual("The Laminator, issue #1", fanboy.a_pie)
+        self.assertEqual('blueberry', fanboy.a_pie)
 
         #
         # NOTE: Change the prefix to make this next assert pass
